@@ -152,15 +152,15 @@ class NavigationItemResource extends Resource
             ->actions([
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
-                Tables\Actions\Action::make('view_children')
-                    ->label('View Children')
-                    ->icon('heroicon-o-chevron-right')
-                    ->url(fn (NavigationItem $record) => NavigationItemResource::getUrl('index', [
-                        'tableFilters' => [
-                            'parent_id' => ['value' => $record->id]
-                        ]
-                    ]))
-                    ->visible(fn (NavigationItem $record) => $record->hasChildren()),
+                // Tables\Actions\Action::make('view_children')
+                //     ->label('View Children')
+                //     ->icon('heroicon-o-chevron-right')
+                //     ->url(fn (NavigationItem $record) => NavigationItemResource::getUrl('index', [
+                //         'tableFilters' => [
+                //             'parent_id' => ['value' => $record->id]
+                //         ]
+                //     ]))
+                //     ->visible(fn (NavigationItem $record) => $record->hasChildren()),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -180,7 +180,17 @@ class NavigationItemResource extends Resource
                 ]),
             ])
             ->reorderable('sort_order')
-            ->defaultGroup('parent_id');
+            ->groups([
+                Tables\Grouping\Group::make('parent.title')
+                    ->label('Parent')
+                    ->getTitleFromRecordUsing(fn (NavigationItem $record) =>
+                        $record->parent?->title ?? 'Root Level'
+                    )
+                    ->getKeyFromRecordUsing(fn (NavigationItem $record) =>
+                        (string) ($record->parent_id ?? 0)
+                    ),
+            ])
+            ->defaultGroup('parent.title');;
     }
 
     public static function getPages(): array

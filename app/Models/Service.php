@@ -63,20 +63,20 @@ class Service extends Model
         return $this->belongsTo(ServiceCategory::class, 'category_id');
     }
 
-    public function faqs(): HasMany
-    {
-        return $this->hasMany(ServiceFaq::class)->orderBy('order');
-    }
+    // public function faqs(): HasMany
+    // {
+    //     return $this->hasMany(ServiceFaq::class)->orderBy('order');
+    // }
 
-    public function testimonials(): HasMany
-    {
-        return $this->hasMany(ServiceTestimonial::class)->orderBy('order');
-    }
+    // public function testimonials(): HasMany
+    // {
+    //     return $this->hasMany(ServiceTestimonial::class)->orderBy('order');
+    // }
 
-    public function inquiries(): HasMany
-    {
-        return $this->hasMany(ServiceInquiry::class)->latest();
-    }
+    // public function inquiries(): HasMany
+    // {
+    //     return $this->hasMany(ServiceInquiry::class)->latest();
+    // }
 
     public function scopeActive($query)
     {

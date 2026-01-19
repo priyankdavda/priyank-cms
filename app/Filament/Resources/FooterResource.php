@@ -21,143 +21,22 @@ class FooterResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\Section::make('General Settings')
+                Forms\Components\Grid::make(3)
                     ->schema([
-                        Forms\Components\TextInput::make('name')
-                            ->required()
-                            ->unique(ignoreRecord: true)
-                            ->maxLength(255),
-                        Forms\Components\Toggle::make('is_active')
-                            ->label('Active Footer')
-                            ->default(true)
-                            ->helperText('Only one footer can be active at a time'),
-                    ])->columns(2),
-
-                Forms\Components\Tabs::make('Footer Content')
-                    ->tabs([
-                        Forms\Components\Tabs\Tab::make('Services')
+                        Forms\Components\Section::make('General Settings')
                             ->schema([
-                                Forms\Components\Repeater::make('services')
-                                    ->schema([
-                                        Forms\Components\TextInput::make('title')
-                                            ->required()
-                                            ->maxLength(255),
-                                        Forms\Components\TextInput::make('url')
-                                            ->url()
-                                            ->required()
-                                            ->maxLength(255),
-                                        Forms\Components\Toggle::make('open_new_tab')
-                                            ->default(false),
-                                    ])
-                                    ->columns(3)
-                                    ->defaultItems(0)
-                                    ->collapsible()
-                                    ->itemLabel(fn (array $state): ?string => $state['title'] ?? null),
-                            ]),
+                                Forms\Components\TextInput::make('name')
+                                    ->required()
+                                    ->unique(ignoreRecord: true)
+                                    ->maxLength(255),
+                                Forms\Components\Toggle::make('is_active')
+                                    ->label('Active Footer')
+                                    ->default(true)
+                                    ->helperText('Only one footer can be active at a time'),
+                            ])
+                            ->columnSpan(1),
 
-                        Forms\Components\Tabs\Tab::make('Information')
-                            ->schema([
-                                Forms\Components\Repeater::make('information')
-                                    ->schema([
-                                        Forms\Components\TextInput::make('title')
-                                            ->required()
-                                            ->maxLength(255),
-                                        Forms\Components\TextInput::make('url')
-                                            ->url()
-                                            ->required()
-                                            ->maxLength(255),
-                                        Forms\Components\Toggle::make('open_new_tab')
-                                            ->default(false),
-                                    ])
-                                    ->columns(3)
-                                    ->defaultItems(0)
-                                    ->collapsible()
-                                    ->itemLabel(fn (array $state): ?string => $state['title'] ?? null),
-                            ]),
-
-                        Forms\Components\Tabs\Tab::make('Resources')
-                            ->schema([
-                                Forms\Components\Repeater::make('resources')
-                                    ->schema([
-                                        Forms\Components\TextInput::make('title')
-                                            ->required()
-                                            ->maxLength(255),
-                                        Forms\Components\TextInput::make('url')
-                                            ->url()
-                                            ->required()
-                                            ->maxLength(255),
-                                        Forms\Components\Toggle::make('open_new_tab')
-                                            ->default(false),
-                                    ])
-                                    ->columns(3)
-                                    ->defaultItems(0)
-                                    ->collapsible()
-                                    ->itemLabel(fn (array $state): ?string => $state['title'] ?? null),
-                            ]),
-
-                        Forms\Components\Tabs\Tab::make('Social Media')
-                            ->schema([
-                                Forms\Components\Repeater::make('social_links')
-                                    ->schema([
-                                        Forms\Components\Select::make('platform')
-                                            ->required()
-                                            ->options([
-                                                'facebook' => 'Facebook',
-                                                'twitter' => 'Twitter',
-                                                'linkedin' => 'LinkedIn',
-                                                'youtube' => 'YouTube',
-                                                'instagram' => 'Instagram',
-                                                'tiktok' => 'TikTok',
-                                                'github' => 'GitHub',
-                                            ])
-                                            ->searchable(),
-                                        Forms\Components\TextInput::make('url')
-                                            ->url()
-                                            ->required()
-                                            ->maxLength(255)
-                                            ->placeholder('https://facebook.com/yourpage'),
-                                        Forms\Components\TextInput::make('icon')
-                                            ->maxLength(255)
-                                            ->helperText('Optional: Custom icon class or SVG'),
-                                    ])
-                                    ->columns(3)
-                                    ->defaultItems(0)
-                                    ->collapsible()
-                                    ->itemLabel(fn (array $state): ?string => ucfirst($state['platform'] ?? 'Social Link')),
-                            ]),
-
-                        Forms\Components\Tabs\Tab::make('Contact Info')
-                            ->schema([
-                                Forms\Components\Section::make('Address')
-                                    ->schema([
-                                        Forms\Components\TextInput::make('contact_info.address.line1')
-                                            ->label('Address Line 1')
-                                            ->maxLength(255),
-                                        Forms\Components\TextInput::make('contact_info.address.line2')
-                                            ->label('Address Line 2')
-                                            ->maxLength(255),
-                                        Forms\Components\TextInput::make('contact_info.address.city')
-                                            ->label('City')
-                                            ->maxLength(100),
-                                        Forms\Components\TextInput::make('contact_info.address.country')
-                                            ->label('Country')
-                                            ->maxLength(100),
-                                    ])->columns(2),
-
-                                Forms\Components\Section::make('Contact Details')
-                                    ->schema([
-                                        Forms\Components\TextInput::make('contact_info.phone')
-                                            ->label('Phone Number')
-                                            ->tel()
-                                            ->maxLength(50),
-                                        Forms\Components\TextInput::make('contact_info.email')
-                                            ->label('Email Address')
-                                            ->email()
-                                            ->maxLength(255),
-                                    ])->columns(2),
-                            ]),
-
-                        Forms\Components\Tabs\Tab::make('Copyright')
+                        Forms\Components\Section::make('Copyright Information')
                             ->schema([
                                 Forms\Components\TextInput::make('copyright_text')
                                     ->label('Copyright Text')
@@ -170,8 +49,179 @@ class FooterResource extends Resource
                                     ->default(now()->year)
                                     ->minValue(2000)
                                     ->maxValue(2100),
-                            ])->columns(2),
+                            ])
+                            ->columnSpan(2),
                     ]),
+
+                Forms\Components\Section::make('Footer Links')
+                    ->description('Organize your footer navigation links')
+                    ->schema([
+                        Forms\Components\Grid::make(1)
+                            ->schema([
+                                Forms\Components\Section::make('Services')
+                                    ->schema([
+                                        Forms\Components\Repeater::make('services')
+                                            ->schema([
+                                                Forms\Components\TextInput::make('title')
+                                                    ->required()
+                                                    ->maxLength(255),
+                                                Forms\Components\TextInput::make('url')
+                                                    ->url()
+                                                    ->required()
+                                                    ->maxLength(255)
+                                                    ->columnSpan(2),
+                                                Forms\Components\Toggle::make('open_new_tab')
+                                                    ->label('New Tab')
+                                                    ->inline(false)
+                                                    ->default(false),
+                                            ])
+                                            ->columns(3)
+                                            ->defaultItems(0)
+                                            ->collapsed()
+                                            ->cloneable()
+                                            ->itemLabel(fn (array $state): ?string => $state['title'] ?? 'Service Link')
+                                            ->addActionLabel('Add Service Link'),
+                                    ])
+                                    ->collapsible()
+                                    ->columnSpan(1),
+
+                                Forms\Components\Section::make('Information')
+                                    ->schema([
+                                        Forms\Components\Repeater::make('information')
+                                            ->schema([
+                                                Forms\Components\TextInput::make('title')
+                                                    ->required()
+                                                    ->maxLength(255),
+                                                Forms\Components\TextInput::make('url')
+                                                    ->url()
+                                                    ->required()
+                                                    ->maxLength(255)
+                                                    ->columnSpan(2),
+                                                Forms\Components\Toggle::make('open_new_tab')
+                                                    ->label('New Tab')
+                                                    ->inline(false)
+                                                    ->default(false),
+                                            ])
+                                            ->columns(3)
+                                            ->defaultItems(0)
+                                            ->collapsed()
+                                            ->cloneable()
+                                            ->itemLabel(fn (array $state): ?string => $state['title'] ?? 'Info Link')
+                                            ->addActionLabel('Add Info Link'),
+                                    ])
+                                    ->collapsible()
+                                    ->columnSpan(1),
+
+                                Forms\Components\Section::make('Resources')
+                                    ->schema([
+                                        Forms\Components\Repeater::make('resources')
+                                            ->schema([
+                                                Forms\Components\TextInput::make('title')
+                                                    ->required()
+                                                    ->maxLength(255),
+                                                Forms\Components\TextInput::make('url')
+                                                    ->url()
+                                                    ->required()
+                                                    ->maxLength(255)
+                                                    ->columnSpan(2),
+                                                Forms\Components\Toggle::make('open_new_tab')
+                                                    ->label('New Tab')
+                                                    ->inline(false)
+                                                    ->default(false),
+                                            ])
+                                            ->columns(3)
+                                            ->defaultItems(0)
+                                            ->collapsed()
+                                            ->cloneable()
+                                            ->itemLabel(fn (array $state): ?string => $state['title'] ?? 'Resource Link')
+                                            ->addActionLabel('Add Resource Link'),
+                                    ])
+                                    ->collapsible()
+                                    ->columnSpan(1),
+                            ]),
+                    ])
+                    ->collapsible(),
+
+                Forms\Components\Section::make('Social Media Links')
+                    ->description('Add your social media profiles')
+                    ->schema([
+                        Forms\Components\Repeater::make('social_links')
+                            ->schema([
+                                Forms\Components\Select::make('platform')
+                                    ->required()
+                                    ->options([
+                                        'facebook' => 'Facebook',
+                                        'twitter' => 'Twitter',
+                                        'linkedin' => 'LinkedIn',
+                                        'youtube' => 'YouTube',
+                                        'instagram' => 'Instagram',
+                                        'tiktok' => 'TikTok',
+                                        'github' => 'GitHub',
+                                    ])
+                                    ->searchable()
+                                    ->columnSpan(1),
+                                Forms\Components\TextInput::make('url')
+                                    ->url()
+                                    ->required()
+                                    ->maxLength(255)
+                                    ->placeholder('https://facebook.com/yourpage')
+                                    ->columnSpan(2),
+                                Forms\Components\TextInput::make('icon')
+                                    ->maxLength(255)
+                                    ->placeholder('fa-facebook')
+                                    ->helperText('Optional: Custom icon class')
+                                    ->columnSpan(1),
+                            ])
+                            ->columns(4)
+                            ->defaultItems(0)
+                            ->collapsed()
+                            ->cloneable()
+                            ->itemLabel(fn (array $state): ?string => ucfirst($state['platform'] ?? 'Social Link'))
+                            ->addActionLabel('Add Social Media Link')
+                            ->grid(2),
+                    ])
+                    ->collapsible(),
+
+                Forms\Components\Section::make('Contact Information')
+                    ->description('Business contact details displayed in footer')
+                    ->schema([
+                        Forms\Components\Grid::make(2)
+                            ->schema([
+                                Forms\Components\Fieldset::make('Address')
+                                    ->schema([
+                                        Forms\Components\TextInput::make('contact_info.address.line1')
+                                            ->label('Address Line 1')
+                                            ->maxLength(255),
+                                        Forms\Components\TextInput::make('contact_info.address.line2')
+                                            ->label('Address Line 2')
+                                            ->maxLength(255),
+                                        Forms\Components\Grid::make(2)
+                                            ->schema([
+                                                Forms\Components\TextInput::make('contact_info.address.city')
+                                                    ->label('City')
+                                                    ->maxLength(100),
+                                                Forms\Components\TextInput::make('contact_info.address.country')
+                                                    ->label('Country')
+                                                    ->maxLength(100),
+                                            ]),
+                                    ]),
+
+                                Forms\Components\Fieldset::make('Contact Details')
+                                    ->schema([
+                                        Forms\Components\TextInput::make('contact_info.phone')
+                                            ->label('Phone Number')
+                                            ->tel()
+                                            ->maxLength(50)
+                                            ->placeholder('+1 (555) 123-4567'),
+                                        Forms\Components\TextInput::make('contact_info.email')
+                                            ->label('Email Address')
+                                            ->email()
+                                            ->maxLength(255)
+                                            ->placeholder('contact@example.com'),
+                                    ]),
+                            ]),
+                    ])
+                    ->collapsible(),
             ]);
     }
 

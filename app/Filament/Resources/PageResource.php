@@ -396,10 +396,10 @@ class PageResource extends Resource
                     Tables\Actions\DeleteAction::make(),
                     Tables\Actions\ForceDeleteAction::make(),
                     Tables\Actions\RestoreAction::make(),
-                    Tables\Actions\Action::make('preview')
-                        ->icon('heroicon-o-eye')
-                        ->url(fn (Page $record): string => route('pages.show', $record))
-                        ->openUrlInNewTab(),
+                    // Tables\Actions\Action::make('preview')
+                    //     ->icon('heroicon-o-eye')
+                    //     ->url(fn (Page $record): string => route('pages.show', $record))
+                    //     ->openUrlInNewTab(),
                 ]),
             ])
             ->bulkActions([

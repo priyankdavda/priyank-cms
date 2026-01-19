@@ -87,9 +87,30 @@ class IndustryResource extends Resource
                     ->sortable()
                     ->searchable(),
 
-                Tables\Columns\ImageColumn::make('icon_image')
-                    ->circular()
-                    ->toggleable(),
+                // Tables\Columns\TextColumn::make('icon')
+                // ->label('Icon')
+                // ->html()
+                // ->state(function ($record) {
+                //     if (! empty($record->icon_svg)) {
+                //         return "
+                //             <div class='w-8 h-8 text-gray-700'>
+                //                 {$record->icon_svg}
+                //             </div>
+                //         ";
+                //     }
+            
+                //     if ($record->icon_image) {
+                //         return "
+                //             <img
+                //                 src='" . asset('storage/' . $record->icon_image) . "'
+                //                 class='w-8 h-8 rounded-full object-contain'
+                //             />
+                //         ";
+                //     }
+            
+                //     return '-';
+                // }),
+                
 
                 Tables\Columns\IconColumn::make('is_active')
                     ->boolean(),
@@ -102,6 +123,7 @@ class IndustryResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),

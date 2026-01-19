@@ -17,12 +17,12 @@ class EditPage extends EditRecord
             Actions\ForceDeleteAction::make(),
             Actions\RestoreAction::make(),
             
-            Actions\Action::make('preview')
-                ->label('Preview')
-                ->icon('heroicon-o-eye')
-                ->url(fn ($record) => route('pages.show', $record))
-                ->openUrlInNewTab()
-                ->color('gray'),
+            // Actions\Action::make('preview')
+            //     ->label('Preview')
+            //     ->icon('heroicon-o-eye')
+            //     ->url(fn ($record) => route('pages.show', $record))
+            //     ->openUrlInNewTab()
+            //     ->color('gray'),
         ];
     }
 
