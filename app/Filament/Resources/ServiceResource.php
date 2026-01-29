@@ -81,6 +81,12 @@ class ServiceResource extends Resource
                         Forms\Components\TextInput::make('icon')
                             ->helperText('Icon class (e.g., heroicon-o-star)'),
                         
+                        Forms\Components\TextInput::make('video_link')
+                            ->label('Video Link')
+                            ->url()
+                            ->helperText('YouTube, Vimeo, or other video URL')
+                            ->columnSpanFull(),
+                        
                         Forms\Components\FileUpload::make('gallery')
                             ->multiple()
                             ->image()
@@ -91,25 +97,25 @@ class ServiceResource extends Resource
                     ])
                     ->columns(2),
 
-                Forms\Components\Section::make('Pricing')
-                    ->schema([
-                        Forms\Components\TextInput::make('price')
-                            ->numeric()
-                            ->prefix('$')
-                            ->maxValue(999999.99),
+                // Forms\Components\Section::make('Pricing')
+                //     ->schema([
+                //         Forms\Components\TextInput::make('price')
+                //             ->numeric()
+                //             ->prefix('$')
+                //             ->maxValue(999999.99),
                         
-                        Forms\Components\Select::make('price_type')
-                            ->options([
-                                'fixed' => 'Fixed Price',
-                                'starting_from' => 'Starting From',
-                                'contact' => 'Contact for Pricing',
-                            ])
-                            ->default('fixed'),
+                //         Forms\Components\Select::make('price_type')
+                //             ->options([
+                //                 'fixed' => 'Fixed Price',
+                //                 'starting_from' => 'Starting From',
+                //                 'contact' => 'Contact for Pricing',
+                //             ])
+                //             ->default('fixed'),
                         
-                        Forms\Components\TextInput::make('duration')
-                            ->helperText('e.g., "2 weeks", "1 month", "Per hour"'),
-                    ])
-                    ->columns(3),
+                //         Forms\Components\TextInput::make('duration')
+                //             ->helperText('e.g., "2 weeks", "1 month", "Per hour"'),
+                //     ])
+                //     ->columns(3),
 
                 Forms\Components\Section::make('Features')
                     ->schema([
@@ -121,6 +127,49 @@ class ServiceResource extends Resource
                             ->defaultItems(0)
                             ->columnSpanFull(),
                     ]),
+
+                Forms\Components\Section::make('Content Blocks')
+                    ->schema([
+                        Forms\Components\Repeater::make('content_blocks')
+                            ->schema([
+                                Forms\Components\TextInput::make('heading')
+                                    ->label('Heading')
+                                    ->required()
+                                    ->columnSpanFull(),
+                                
+                                Forms\Components\Textarea::make('description')
+                                    ->label('Short Description')
+                                    ->rows(3)
+                                    ->columnSpanFull(),
+                            ])
+                            ->orderable()
+                            ->reorderable()
+                            ->defaultItems(0)
+                            ->columnSpanFull(),
+                    ])
+                    ->collapsed(),
+
+                Forms\Components\Section::make('Q&A')
+                    ->schema([
+                        Forms\Components\Repeater::make('qna')
+                            ->label('Questions & Answers')
+                            ->schema([
+                                Forms\Components\TextInput::make('question')
+                                    ->label('Question Heading')
+                                    ->required()
+                                    ->columnSpanFull(),
+                                
+                                Forms\Components\Textarea::make('answer')
+                                    ->label('Short Answer')
+                                    ->rows(3)
+                                    ->columnSpanFull(),
+                            ])
+                            ->orderable()
+                            ->reorderable()
+                            ->defaultItems(0)
+                            ->columnSpanFull(),
+                    ])
+                    ->collapsed(),
 
                 Forms\Components\Section::make('SEO')
                     ->schema([
