@@ -15,6 +15,9 @@ class ServiceContentSeeder extends Seeder
     {
         $servicesData = [
             'AI-driven SEO & AEO' => [
+                'content_blocks_tagline' => 'Dominate Search & AI Results',
+                'qna_heading' => 'Our SEO Process That Actually Works',
+                'qna_tagline' => 'How We Build SEO Results Step by Step',
                 'content_blocks' => [
                     [
                         'heading' => 'Advanced AI-Powered Optimization',
@@ -53,6 +56,9 @@ class ServiceContentSeeder extends Seeder
                 ],
             ],
             'Lead Generation' => [
+                'content_blocks_tagline' => 'Convert More Prospects Into Customers',
+                'qna_heading' => 'Lead Generation Questions Answered',
+                'qna_tagline' => 'Everything You Need to Know About Quality Leads',
                 'content_blocks' => [
                     [
                         'heading' => 'Multi-Channel Lead Capture',
@@ -91,6 +97,9 @@ class ServiceContentSeeder extends Seeder
                 ],
             ],
             'Brand & Social Management' => [
+                'content_blocks_tagline' => 'Build A Brand That Resonates',
+                'qna_heading' => 'Your Brand & Social Media Questions',
+                'qna_tagline' => 'Expert Answers to Common Social Management Questions',
                 'content_blocks' => [
                     [
                         'heading' => 'Strategic Brand Positioning',
@@ -129,6 +138,9 @@ class ServiceContentSeeder extends Seeder
                 ],
             ],
             'AI Graphics & Videos' => [
+                'content_blocks_tagline' => 'Create Stunning Visuals In Minutes',
+                'qna_heading' => 'AI Content Creation FAQ',
+                'qna_tagline' => 'Your Questions About AI Graphics & Video Production',
                 'content_blocks' => [
                     [
                         'heading' => 'AI-Powered Visual Creation',
@@ -167,6 +179,9 @@ class ServiceContentSeeder extends Seeder
                 ],
             ],
             'Web Development' => [
+                'content_blocks_tagline' => 'Powerful Websites That Drive Results',
+                'qna_heading' => 'Web Development Common Questions',
+                'qna_tagline' => 'Learn About Our Development Process & Services',
                 'content_blocks' => [
                     [
                         'heading' => 'Custom Web Applications',
@@ -205,6 +220,9 @@ class ServiceContentSeeder extends Seeder
                 ],
             ],
             'Digital Marketing' => [
+                'content_blocks_tagline' => 'Grow Your Business Online',
+                'qna_heading' => 'Digital Marketing Questions',
+                'qna_tagline' => 'Get Clear Answers About Our Marketing Services',
                 'content_blocks' => [
                     [
                         'heading' => 'Comprehensive Marketing Strategy',
@@ -249,7 +267,10 @@ class ServiceContentSeeder extends Seeder
             
             if ($service) {
                 $service->update([
+                    'content_blocks_tagline' => $data['content_blocks_tagline'],
                     'content_blocks' => $data['content_blocks'],
+                    'qna_heading' => $data['qna_heading'],
+                    'qna_tagline' => $data['qna_tagline'],
                     'qna' => $data['qna'],
                 ]);
                 

@@ -130,6 +130,11 @@ class ServiceResource extends Resource
 
                 Forms\Components\Section::make('Content Blocks')
                     ->schema([
+                        Forms\Components\TextInput::make('content_blocks_tagline')
+                            ->label('Section Tagline')
+                            ->helperText('A catchy tagline/heading for the entire content blocks section')
+                            ->columnSpanFull(),
+                        
                         Forms\Components\Repeater::make('content_blocks')
                             ->schema([
                                 Forms\Components\TextInput::make('heading')
@@ -151,6 +156,16 @@ class ServiceResource extends Resource
 
                 Forms\Components\Section::make('Q&A')
                     ->schema([
+                        Forms\Components\TextInput::make('qna_heading')
+                            ->label('Section Heading')
+                            ->helperText('Main heading for the Q&A section')
+                            ->columnSpanFull(),
+                        
+                        Forms\Components\TextInput::make('qna_tagline')
+                            ->label('Section Tagline')
+                            ->helperText('A descriptive tagline for the Q&A section')
+                            ->columnSpanFull(),
+                        
                         Forms\Components\Repeater::make('qna')
                             ->label('Questions & Answers')
                             ->schema([
