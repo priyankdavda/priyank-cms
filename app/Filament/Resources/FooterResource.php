@@ -66,9 +66,10 @@ class FooterResource extends Resource
                                                     ->required()
                                                     ->maxLength(255),
                                                 Forms\Components\TextInput::make('url')
-                                                    ->url()
-                                                    ->required()
                                                     ->maxLength(255)
+                                                    ->regex('/^(https?:\/\/[^\s]+|\/[^\s]*|#[^\s]*)$/')
+                                                    ->validationAttribute('URL')
+                                                    ->helperText('Enter a full URL, relative path (/page), or anchor (#)')
                                                     ->columnSpan(2),
                                                 Forms\Components\Toggle::make('open_new_tab')
                                                     ->label('New Tab')
@@ -93,9 +94,11 @@ class FooterResource extends Resource
                                                     ->required()
                                                     ->maxLength(255),
                                                 Forms\Components\TextInput::make('url')
-                                                    ->url()
                                                     ->required()
                                                     ->maxLength(255)
+                                                    ->regex('/^(https?:\/\/[^\s]+|\/[^\s]*|#[^\s]*)$/')
+                                                    ->validationAttribute('URL')
+                                                    ->helperText('Enter a full URL, relative path (/page), or anchor (#)')
                                                     ->columnSpan(2),
                                                 Forms\Components\Toggle::make('open_new_tab')
                                                     ->label('New Tab')
@@ -120,9 +123,11 @@ class FooterResource extends Resource
                                                     ->required()
                                                     ->maxLength(255),
                                                 Forms\Components\TextInput::make('url')
-                                                    ->url()
                                                     ->required()
                                                     ->maxLength(255)
+                                                    ->regex('/^(https?:\/\/[^\s]+|\/[^\s]*|#[^\s]*)$/')
+                                                    ->validationAttribute('URL')
+                                                    ->helperText('Enter a full URL, relative path (/page), or anchor (#)')
                                                     ->columnSpan(2),
                                                 Forms\Components\Toggle::make('open_new_tab')
                                                     ->label('New Tab')
@@ -161,10 +166,12 @@ class FooterResource extends Resource
                                     ->searchable()
                                     ->columnSpan(1),
                                 Forms\Components\TextInput::make('url')
-                                    ->url()
                                     ->required()
                                     ->maxLength(255)
+                                    ->regex('/^(https?:\/\/[^\s]+|\/[^\s]*|#[^\s]*)$/')
+                                    ->validationAttribute('URL')
                                     ->placeholder('https://facebook.com/yourpage')
+                                    ->helperText('Enter a full URL, relative path (/page), or anchor (#)')
                                     ->columnSpan(2),
                                 Forms\Components\TextInput::make('icon')
                                     ->maxLength(255)
