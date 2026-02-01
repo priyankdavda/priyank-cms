@@ -23,6 +23,7 @@ class CaseStudy extends Model
         'keywords',
         'results',
         'challenge',
+        'challenges',
         'completed_date',
         'gallery',
         'content',
@@ -38,6 +39,7 @@ class CaseStudy extends Model
     protected $casts = [
         'keywords' => 'array',
         'gallery' => 'array',
+        'challenges' => 'array',
         'is_published' => 'boolean',
         'is_featured' => 'boolean',
         'completed_date' => 'date',

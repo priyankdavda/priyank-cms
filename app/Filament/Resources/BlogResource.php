@@ -135,6 +135,63 @@ class BlogResource extends Resource
                             ->separator(',')
                             ->helperText('Press Enter or comma to add keywords')
                             ->columnSpanFull(),
+
+                        Forms\Components\TextInput::make('canonical')
+                            ->label('Canonical URL')
+                            ->maxLength(255)
+                            ->url()
+                            ->helperText('The preferred URL for this page')
+                            ->columnSpanFull(),
+
+                        Forms\Components\Fieldset::make('Open Graph')
+                            ->schema([
+                                Forms\Components\TextInput::make('og_title')
+                                    ->label('OG Title')
+                                    ->maxLength(60)
+                                    ->helperText('Title for social media sharing')
+                                    ->columnSpanFull(),
+
+                                Forms\Components\Textarea::make('og_description')
+                                    ->label('OG Description')
+                                    ->rows(3)
+                                    ->maxLength(200)
+                                    ->helperText('Description for social media sharing')
+                                    ->columnSpanFull(),
+
+                                Forms\Components\FileUpload::make('og_image')
+                                    ->label('OG Image')
+                                    ->image()
+                                    ->directory('blogs/og-images')
+                                    ->imageEditor()
+                                    ->helperText('Recommended: 1200x630px')
+                                    ->columnSpanFull(),
+                            ])
+                            ->columnSpanFull(),
+
+                        Forms\Components\Fieldset::make('Twitter Card')
+                            ->schema([
+                                Forms\Components\TextInput::make('twitter_title')
+                                    ->label('Twitter Title')
+                                    ->maxLength(60)
+                                    ->helperText('Title for Twitter card')
+                                    ->columnSpanFull(),
+
+                                Forms\Components\Textarea::make('twitter_description')
+                                    ->label('Twitter Description')
+                                    ->rows(3)
+                                    ->maxLength(200)
+                                    ->helperText('Description for Twitter card')
+                                    ->columnSpanFull(),
+
+                                Forms\Components\FileUpload::make('twitter_image')
+                                    ->label('Twitter Image')
+                                    ->image()
+                                    ->directory('blogs/twitter-images')
+                                    ->imageEditor()
+                                    ->helperText('Recommended: 1200x675px or 1:1 ratio')
+                                    ->columnSpanFull(),
+                            ])
+                            ->columnSpanFull(),
                     ])
                     ->collapsed(),
             ]);

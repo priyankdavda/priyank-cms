@@ -94,6 +94,21 @@ class CaseStudyResource extends Resource
                             ->placeholder('Describe the challenges faced...')
                             ->columnSpanFull(),
                             
+                        Forms\Components\Repeater::make('challenges')
+                            ->label('Challenges We Face')
+                            ->schema([
+                                Forms\Components\TextInput::make('challenge')
+                                    ->required()
+                                    ->maxLength(255)
+                                    ->placeholder('e.g., Intelligent Process Automation'),
+                            ])
+                            ->columnSpanFull()
+                            ->defaultItems(0)
+                            ->addActionLabel('Add Challenge')
+                            ->helperText('List key challenges faced in this case study')
+                            ->reorderable()
+                            ->collapsible(),
+                            
                         Forms\Components\Textarea::make('results')
                             ->rows(5)
                             ->placeholder('Describe the results achieved...')
