@@ -137,6 +137,14 @@ class ServiceResource extends Resource
                         
                         Forms\Components\Repeater::make('content_blocks')
                             ->schema([
+                                
+                                Forms\Components\FileUpload::make('thumbnail')
+                                ->label('Thumbnail')
+                                ->image()
+                                ->maxSize(2048)
+                                ->directory('services/content-blocks')
+                                ->columnSpanFull(),
+
                                 Forms\Components\TextInput::make('heading')
                                     ->label('Heading')
                                     ->required()
