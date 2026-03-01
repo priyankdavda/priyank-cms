@@ -70,7 +70,6 @@ class BannerResource extends Resource
 
                                 Forms\Components\TextInput::make('button_link')
                                     ->label('Button Link')
-                                    ->url()
                                     ->maxLength(255),
                             ]),
 
