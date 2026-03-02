@@ -120,34 +120,7 @@ class ServiceResource extends Resource
                 //     ])
                 //     ->columns(3),
 
-                Forms\Components\Section::make('Features')
-                ->schema([
-                    Forms\Components\Repeater::make('features')
-                        ->label('Feature Groups')
-                        ->schema([
-                            Forms\Components\TextInput::make('title')
-                                ->required()
-                                ->columnSpanFull(),
-            
-                            Forms\Components\TextInput::make('subtitle')
-                                ->columnSpanFull(),
-            
-                            Forms\Components\Textarea::make('description')
-                                ->rows(3)
-                                ->columnSpanFull(),
-            
-                            Forms\Components\Repeater::make('items')
-                                ->label('Feature Items')
-                                ->schema([
-                                    Forms\Components\TextInput::make('feature')
-                                        ->required(),
-                                ])
-                                ->defaultItems(0)
-                                ->columnSpanFull(),
-                        ])
-                        ->defaultItems(0)
-                        ->columnSpanFull(),
-                ]),
+
 
                 Forms\Components\Section::make('Content Blocks')
                     ->schema([
@@ -156,6 +129,12 @@ class ServiceResource extends Resource
                             ->helperText('A catchy tagline/heading for the entire content blocks section')
                             ->columnSpanFull(),
                         
+                        Forms\Components\TextInput::make('content_blocks_description')
+                            ->label('Section Description')
+                            ->helperText('A description for the entire content blocks section')
+                            ->columnSpanFull(),
+                        
+
                         Forms\Components\Repeater::make('content_blocks')
                             ->schema([
                                 
@@ -168,7 +147,6 @@ class ServiceResource extends Resource
 
                                 Forms\Components\TextInput::make('heading')
                                     ->label('Heading')
-                                    ->required()
                                     ->columnSpanFull(),
                                 
                                 Forms\Components\Textarea::make('description')
@@ -179,7 +157,8 @@ class ServiceResource extends Resource
                             ->orderable()
                             ->reorderable()
                             ->defaultItems(0)
-                            ->columnSpanFull(),
+                            ->columnSpanFull()
+                            ->collapsed(),
                     ])
                     ->collapsed(),
 
@@ -214,7 +193,36 @@ class ServiceResource extends Resource
                             ->columnSpanFull(),
                     ])
                     ->collapsed(),
-
+                    
+                Forms\Components\Section::make('Features')
+                    ->schema([
+                        Forms\Components\Repeater::make('features')
+                            ->label('Feature Groups')
+                            ->schema([
+                                Forms\Components\TextInput::make('title')
+                                    ->required()
+                                    ->columnSpanFull(),
+                
+                                Forms\Components\TextInput::make('subtitle')
+                                    ->columnSpanFull(),
+                
+                                Forms\Components\Textarea::make('description')
+                                    ->rows(3)
+                                    ->columnSpanFull(),
+                
+                                Forms\Components\Repeater::make('items')
+                                    ->label('Feature Items')
+                                    ->schema([
+                                        Forms\Components\TextInput::make('feature')
+                                            ->required(),
+                                    ])
+                                    ->defaultItems(0)
+                                    ->columnSpanFull(),
+                            ])
+                            ->defaultItems(0)
+                            ->columnSpanFull(),
+                    ])
+                    ->collapsed(),
                 Forms\Components\Section::make('SEO & CTA')
                     ->schema([
                         Forms\Components\TextInput::make('meta_title')
@@ -227,9 +235,16 @@ class ServiceResource extends Resource
                         Forms\Components\TagsInput::make('meta_keywords')
                             ->separator(','),
                         
+                        Forms\Components\TextInput::make('meta_data.cta_heading')
+                            ->label('CTA Heading')
+                            ->helperText('Leave empty to default to "Get in Touch"'),
+
+                        Forms\Components\Textarea::make('meta_data.cta_description')
+                            ->label('CTA Description')
+                            ->helperText('Leave empty to default to "Get in Touch with us"'),
+
                         Forms\Components\TextInput::make('meta_data.cta_url')
                             ->label('CTA Button URL')
-                            ->url()
                             ->helperText('Leave empty to default to the contact page'),
 
                         Forms\Components\TextInput::make('meta_data.cta_label')

@@ -30,6 +30,7 @@ class Service extends Model
         'services',
         'content_blocks',
         'content_blocks_tagline',
+        'content_blocks_description',
         'qna',
         'qna_heading',
         'qna_tagline',
