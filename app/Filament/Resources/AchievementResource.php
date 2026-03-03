@@ -53,17 +53,15 @@ class AchievementResource extends Resource
             Forms\Components\Placeholder::make('icon_preview')
                 ->label('Icon Preview')
                 ->content(function (Get $get) {
-                    if ($get('icon_image')) {
-                        return new HtmlString(
-                            "<div class='flex justify-center items-center p-4 rounded-lg bg-gray-900'>
-                                <img src='".asset('storage/'.$get('icon_image'))."' class='w-16 h-16 mx-auto object-contain' />
-                            </div>"
-                        );
-                    }
+                    // if ($get('icon_image')) {
+                    //     return new HtmlString(
+                    //         "<img src='".asset('storage/'.$get('icon_image'))."' class='w-16 h-16 mx-auto' />"
+                    //     );
+                    // }
 
                     if (! $get('icon_svg')) {
                         return new HtmlString(
-                            "<span class='text-gray-400 text-sm'>Upload an image or paste SVG to see a preview</span>"
+                            "<span class='text-gray-400'>Upload an image or paste SVG to preview</span>"
                         );
                     }
 
@@ -98,11 +96,6 @@ class AchievementResource extends Resource
         return $table
             ->defaultSort('sort_order')
             ->columns([
-                // SVG / image thumbnail
-                Tables\Columns\ImageColumn::make('icon_image')
-                    ->label('Icon')
-                    ->defaultImageUrl(asset('images/placeholder-icon.png'))
-                    ->size(40),
 
                 Tables\Columns\TextColumn::make('title')
                     ->label('Stat Value')
